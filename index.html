@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening Practice Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .input-blank {
+            border-bottom: 2px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+        .input-blank:focus {
+            border-bottom-color: #3b82f6;
+            outline: none;
+            background-color: #eff6ff;
+        }
+        .correct {
+            border-color: #22c55e !important;
+            background-color: #f0fdf4 !important;
+            color: #15803d;
+        }
+        .incorrect {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+            color: #b91c1c;
+        }
+        .feedback {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        .feedback.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Listening Practice Test</h1>
+            <p class="text-gray-600">Complete the exercises below. Click "Check Answers" when finished.</p>
+        </header>
+
+        <!-- Part 1: Restaurants -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="border-b border-gray-100 pb-4 mb-6">
+                <h2 class="text-xl font-bold text-blue-600">Part 1: Restaurant Notes</h2>
+                <p class="text-sm text-gray-500 mt-1">Complete the notes below. Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="p-4 font-semibold text-gray-700 w-1/5">Name</th>
+                            <th class="p-4 font-semibold text-gray-700 w-1/4">Location</th>
+                            <th class="p-4 font-semibold text-gray-700 w-1/4">Reason for recommendation</th>
+                            <th class="p-4 font-semibold text-gray-700 w-1/3">Other comments</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-4 align-top font-medium">The Junction</td>
+                            <td class="p-4 align-top">Greyson Street, near the station</td>
+                            <td class="p-4 align-top">
+                                Good for people who are especially keen on <input type="text" data-q="1" class="input-blank w-24 px-1" placeholder="(1)"> food.
+                                <div id="fb-1" class="feedback"></div>
+                            </td>
+                            <td class="p-4 align-top">Quite expensive.</td>
+                        </tr>
+                        
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-4 align-top font-medium">Paloma</td>
+                            <td class="p-4 align-top">In Bow Street next to the cinema</td>
+                            <td class="p-4 align-top">
+                                <input type="text" data-q="3" class="input-blank w-full mb-1" placeholder="(3)">
+                                <div id="fb-3" class="feedback"></div>
+                                dishes are good for sharing.
+                            </td>
+                            <td class="p-4 align-top">
+                                The <input type="text" data-q="2" class="input-blank w-24 px-1" placeholder="(2)"> is a good place for a drink.
+                                <div id="fb-2" class="feedback"></div>
+                                <div class="mt-2 text-sm text-gray-600">Staff are very friendly. Need to pay £50 deposit.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-4 align-top font-medium">
+                                The <input type="text" data-q="5" class="input-blank w-24 px-1" placeholder="(5)">
+                                <div id="fb-5" class="feedback"></div>
+                            </td>
+                            <td class="p-4 align-top">
+                                At the top of a <input type="text" data-q="6" class="input-blank w-24 px-1" placeholder="(6)">
+                                <div id="fb-6" class="feedback"></div>
+                            </td>
+                            <td class="p-4 align-top">
+                                A famous chef. All the <input type="text" data-q="7" class="input-blank w-24 px-1" placeholder="(7)"> are very good.
+                                <div id="fb-7" class="feedback"></div>
+                                <div class="mt-2">Only uses <input type="text" data-q="8" class="input-blank w-24 px-1" placeholder="(8)"> ingredients.</div>
+                                <div id="fb-8" class="feedback"></div>
+                            </td>
+                            <td class="p-4 align-top">
+                                A limited selection of <input type="text" data-q="4" class="input-blank w-24 px-1" placeholder="(4)"> on the menu.
+                                <div id="fb-4" class="feedback"></div>
+                                <div class="mt-2">Set lunch cost: £<input type="text" data-q="9" class="input-blank w-16 px-1" placeholder="(9)"> per person.</div>
+                                <div id="fb-9" class="feedback"></div>
+                                <div class="mt-2">Proportions probably of <input type="text" data-q="10" class="input-blank w-24 px-1" placeholder="(10)"> size.</div>
+                                <div id="fb-10" class="feedback"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Part 2: Pottery -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="border-b border-gray-100 pb-4 mb-6">
+                <h2 class="text-xl font-bold text-blue-600">Part 2: Pottery</h2>
+                <p class="text-sm text-gray-500 mt-1">Questions 11-16: Choose the correct letter, <strong>A, B or C</strong>.</p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Q11 -->
+                <div class="question-block" data-q="11">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">11.</span> Heather says pottery differs from other art forms because</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q11" value="A" class="text-blue-600 focus:ring-blue-500">
+                            <span>A. It lasts longer in the ground.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q11" value="B" class="text-blue-600 focus:ring-blue-500">
+                            <span>B. It is practiced by more people.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q11" value="C" class="text-blue-600 focus:ring-blue-500">
+                            <span>C. It can be repaired more easily.</span>
+                        </label>
+                    </div>
+                    <div id="fb-11" class="feedback ml-4"></div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="question-block" data-q="12">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">12.</span> Archaeologists sometimes identify the use of ancient pottery from</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q12" value="A" class="text-blue-600 focus:ring-blue-500">
+                            <span>A. The clay it was made with.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q12" value="B" class="text-blue-600 focus:ring-blue-500">
+                            <span>B. The marks that are on it.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q12" value="C" class="text-blue-600 focus:ring-blue-500">
+                            <span>C. The basic shape of it.</span>
+                        </label>
+                    </div>
+                    <div id="fb-12" class="feedback ml-4"></div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="question-block" data-q="13">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">13.</span> Some people join Heather's pottery class because they want to</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q13" value="A" class="text-blue-600 focus:ring-blue-500">
+                            <span>A. Create an item that looks very old.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q13" value="B" class="text-blue-600 focus:ring-blue-500">
+                            <span>B. Find something that they are good at.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q13" value="C" class="text-blue-600 focus:ring-blue-500">
+                            <span>C. Make something that will outlive them.</span>
+                        </label>
+                    </div>
+                    <div id="fb-13" class="feedback ml-4"></div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="question-block" data-q="14">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">14.</span> What does Heather value most about being a potter?</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q14" value="A" class="text-blue-600 focus:ring-blue-500">
+                            <span>A. Its calming effect</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q14" value="B" class="text-blue-600 focus:ring-blue-500">
+                            <span>B. Its messy nature</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q14" value="C" class="text-blue-600 focus:ring-blue-500">
+                            <span>C. Its physical benefits</span>
+                        </label>
+                    </div>
+                    <div id="fb-14" class="feedback ml-4"></div>
+                </div>
+
+                <!-- Q15 -->
+                <div class="question-block" data-q="15">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">15.</span> Most of the visitors to Edelman Pottery</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q15" value="A" class="text-blue-600 focus:ring-blue-500">
+                            <span>A. Bring friends to join courses.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q15" value="B" class="text-blue-600 focus:ring-blue-500">
+                            <span>B. Have never made a pot before.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q15" value="C" class="text-blue-600 focus:ring-blue-500">
+                            <span>C. Try to learn techniques too quickly.</span>
+                        </label>
+                    </div>
+                    <div id="fb-15" class="feedback ml-4"></div>
+                </div>
+
+                <!-- Q16 -->
+                <div class="question-block" data-q="16">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">16.</span> Heather reminds her visitors that they should</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q16" value="A" class="text-blue-600 focus:ring-blue-500">
+                            <span>A. Put on their aprons.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q16" value="B" class="text-blue-600 focus:ring-blue-500">
+                            <span>B. Change their clothes.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="radio" name="q16" value="C" class="text-blue-600 focus:ring-blue-500">
+                            <span>C. Take off their jewellery.</span>
+                        </label>
+                    </div>
+                    <div id="fb-16" class="feedback ml-4"></div>
+                </div>
+
+                <div class="border-t border-gray-100 my-6 pt-4">
+                     <p class="text-sm text-gray-500 mt-1 mb-4">Questions 17-20: Choose <strong>TWO</strong> letters, A-E.</p>
+                </div>
+
+                <!-- Q17-18 -->
+                <div class="question-block" data-group="17-18">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">17-18.</span> Which <strong>TWO</strong> things does Heather explain about kilns?</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q17_18" value="A" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>A. what their function is</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q17_18" value="B" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>B. when they were invented</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q17_18" value="C" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>C. ways of keeping them safe</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q17_18" value="D" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>D. where to put one in your home</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q17_18" value="E" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>E. what some people use instead of one</span>
+                        </label>
+                    </div>
+                    <div id="fb-17-18" class="feedback ml-4"></div>
+                </div>
+
+                <!-- Q19-20 -->
+                <div class="question-block mt-8" data-group="19-20">
+                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">19-20.</span> Which <strong>TWO</strong> points does Heather make about a potter's tools?</p>
+                    <div class="space-y-2 pl-4">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q19_20" value="A" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>A. Some are hard to hold.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q19_20" value="B" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>B. Some are worth buying.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q19_20" value="C" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>C. Some are essential items.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q19_20" value="D" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>D. Some have memorable names.</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
+                            <input type="checkbox" name="q19_20" value="E" class="text-blue-600 focus:ring-blue-500 rounded">
+                            <span>E. Some are available for use by participants.</span>
+                        </label>
+                    </div>
+                    <div id="fb-19-20" class="feedback ml-4"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-lg flex justify-between items-center z-50">
+            <div class="text-gray-600 font-medium ml-4">
+                Score: <span id="score-display" class="text-lg font-bold text-gray-900">- / 20</span>
+            </div>
+            <div class="mr-4 space-x-3">
+                <button onclick="resetTest()" class="px-6 py-2.5 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition-colors">
+                    Reset
+                </button>
+                <button onclick="checkAnswers()" class="px-6 py-2.5 rounded-lg font-medium bg-blue-600 text-white hover:bg-blue-700 shadow-sm transition-colors">
+                    Check Answers
+                </button>
+            </div>
+        </div>
+        <div class="h-16"></div> <!-- Spacer for fixed footer -->
+
+    </div>
+
+    <script>
+        const answers = {
+            // Part 1
+            1: "fish",
+            2: "roof",
+            3: "spanish",
+            4: "vegetarian",
+            5: "audley",
+            6: "hotel",
+            7: "reviews",
+            8: "local",
+            9: "30",
+            10: "average",
+            // Part 2 Single Choice
+            11: "A",
+            12: "B",
+            13: "C",
+            14: "A",
+            15: "B",
+            16: "C",
+            // Part 2 Multi Choice (Sets)
+            "17-18": ["A", "E"],
+            "19-20": ["C", "E"]
+        };
+
+        function checkAnswers() {
+            let correctCount = 0;
+            let totalQuestions = 20;
+
+            // Reset styles
+            document.querySelectorAll('.input-blank').forEach(el => {
+                el.classList.remove('correct', 'incorrect');
+            });
+            document.querySelectorAll('.feedback').forEach(el => {
+                el.classList.remove('show');
+                el.innerHTML = '';
+            });
+
+            // Check Part 1 (Text Inputs)
+            for (let i = 1; i <= 10; i++) {
+                const input = document.querySelector(`input[data-q="${i}"]`);
+                const feedback = document.getElementById(`fb-${i}`);
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = answers[i];
+
+                if (userAnswer === correctAnswer) {
+                    input.classList.add('correct');
+                    correctCount++;
+                } else {
+                    input.classList.add('incorrect');
+                    feedback.innerHTML = `<span class="text-red-600"><i class="fas fa-times-circle"></i> Correct: <strong>${answers[i]}</strong></span>`;
+                    feedback.classList.add('show');
+                }
+            }
+
+            // Check Part 2 (Radio Buttons 11-16)
+            for (let i = 11; i <= 16; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const feedback = document.getElementById(`fb-${i}`);
+                
+                if (selected) {
+                    if (selected.value === answers[i]) {
+                        feedback.innerHTML = `<span class="text-green-600"><i class="fas fa-check-circle"></i> Correct!</span>`;
+                        feedback.classList.add('show');
+                        correctCount++;
+                    } else {
+                        feedback.innerHTML = `<span class="text-red-600"><i class="fas fa-times-circle"></i> Incorrect. The answer is <strong>${answers[i]}</strong>.</span>`;
+                        feedback.classList.add('show');
+                    }
+                } else {
+                    feedback.innerHTML = `<span class="text-red-600">Please select an answer.</span>`;
+                    feedback.classList.add('show');
+                }
+            }
+
+            // Check Part 2 (Checkboxes 17-20)
+            const checkMulti = (groupName, correctArr) => {
+                const selected = Array.from(document.querySelectorAll(`input[name="q${groupName.replace('-','_')}"]:checked`)).map(cb => cb.value);
+                const feedback = document.getElementById(`fb-${groupName}`);
+                
+                // Sort for comparison
+                const userSet = new Set(selected);
+                const correctSet = new Set(correctArr);
+                
+                let groupCorrect = 0;
+                
+                // Calculate score for this group (1 point per correct option selected)
+                selected.forEach(val => {
+                    if (correctSet.has(val)) {
+                        groupCorrect++;
+                        correctCount++;
+                    }
+                });
+
+                // Display logic
+                if (selected.length !== 2) {
+                    feedback.innerHTML = `<span class="text-orange-600"><i class="fas fa-exclamation-circle"></i> Please select exactly 2 options.</span>`;
+                } else if (groupCorrect === 2) {
+                    feedback.innerHTML = `<span class="text-green-600"><i class="fas fa-check-circle"></i> Both correct!</span>`;
+                } else if (groupCorrect === 1) {
+                    feedback.innerHTML = `<span class="text-orange-600"><i class="fas fa-exclamation-circle"></i> 1/2 correct. Answers: <strong>${correctArr.join(" & ")}</strong></span>`;
+                } else {
+                    feedback.innerHTML = `<span class="text-red-600"><i class="fas fa-times-circle"></i> Incorrect. Answers: <strong>${correctArr.join(" & ")}</strong></span>`;
+                }
+                feedback.classList.add('show');
+            };
+
+            checkMulti("17-18", answers["17-18"]);
+            checkMulti("19-20", answers["19-20"]);
+
+            // Update Score
+            const scoreEl = document.getElementById('score-display');
+            scoreEl.textContent = `${correctCount} / ${totalQuestions}`;
+            
+            // Scroll to top feedback
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetTest() {
+            if(confirm("Are you sure you want to reset all answers?")) {
+                document.querySelectorAll('input').forEach(input => {
+                    if(input.type === 'text') input.value = '';
+                    if(input.type === 'radio' || input.type === 'checkbox') input.checked = false;
+                    input.classList.remove('correct', 'incorrect');
+                });
+                document.querySelectorAll('.feedback').forEach(el => {
+                    el.classList.remove('show');
+                    el.innerHTML = '';
+                });
+                document.getElementById('score-display').textContent = "- / 20";
+            }
+        }
+    </script>
+</body>
+</html>

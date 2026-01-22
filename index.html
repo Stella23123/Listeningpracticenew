@@ -10,8 +10,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
         .input-blank {
-            border-bottom: 2px solid #e5e7eb;
+            border-bottom: 1px solid #000;
+            background: transparent;
+            padding: 0 4px;
+            font-family: inherit;
+            color: #000;
             transition: all 0.2s;
+            border-radius: 0;
+            min-width: 60px;
         }
         .input-blank:focus {
             border-bottom-color: #3b82f6;
@@ -19,132 +25,213 @@
             background-color: #eff6ff;
         }
         .correct {
-            border-color: #22c55e !important;
+            border-bottom-color: #22c55e !important;
             background-color: #f0fdf4 !important;
             color: #15803d;
         }
         .incorrect {
-            border-color: #ef4444 !important;
+            border-bottom-color: #ef4444 !important;
             background-color: #fef2f2 !important;
             color: #b91c1c;
         }
         .feedback {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             margin-top: 0.25rem;
             display: none;
         }
         .feedback.show {
             display: block;
         }
+        .q-num {
+            font-weight: 700;
+            color: #111827;
+            margin-right: 2px;
+        }
+        /* Custom Table Styling to match handouts */
+        .handout-table {
+            border: 2px solid #000;
+        }
+        .handout-table th, .handout-table td {
+            border: 1px solid #000;
+            vertical-align: top;
+            padding: 12px;
+        }
+        .handout-table th {
+            background-color: #f3f4f6;
+            font-weight: 700;
+            text-align: center;
+        }
+        .cell-list {
+            list-style-type: disc;
+            padding-left: 1.2rem;
+            margin: 0;
+        }
+        .cell-list li {
+            margin-bottom: 0.5rem;
+        }
+        .cell-list li:last-child {
+            margin-bottom: 0;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen">
+<body class="bg-gray-100 text-gray-800 min-h-screen py-8">
 
-    <div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="max-w-5xl mx-auto px-4">
         
         <!-- Header -->
-        <header class="mb-8 text-center">
+        <header class="mb-8 text-center bg-white p-6 rounded-lg shadow-sm">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Listening Practice Test</h1>
-            <p class="text-gray-600">Complete the exercises below. Click "Check Answers" when finished.</p>
+            <p class="text-gray-600">Complete the exercises below.</p>
         </header>
 
         <!-- Part 1: Restaurants -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div class="border-b border-gray-100 pb-4 mb-6">
-                <h2 class="text-xl font-bold text-blue-600">Part 1: Restaurant Notes</h2>
-                <p class="text-sm text-gray-500 mt-1">Complete the notes below. Write <strong>ONE WORD AND/OR A NUMBER</strong> for each answer.</p>
+        <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+            <div class="border-b border-gray-200 pb-4 mb-6 flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Part 1: Restaurant Notes</h2>
+                    <p class="text-sm text-gray-500 mt-1">Questions 1-10: Complete the notes below. Write <strong>ONE WORD AND/OR A NUMBER</strong>.</p>
+                </div>
+                <div class="text-right">
+                    <span id="score-part1" class="font-bold text-xl text-gray-400">0/10</span>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-collapse handout-table text-sm md:text-base">
                     <thead>
-                        <tr class="bg-gray-50 border-b border-gray-200">
-                            <th class="p-4 font-semibold text-gray-700 w-1/5">Name</th>
-                            <th class="p-4 font-semibold text-gray-700 w-1/4">Location</th>
-                            <th class="p-4 font-semibold text-gray-700 w-1/4">Reason for recommendation</th>
-                            <th class="p-4 font-semibold text-gray-700 w-1/3">Other comments</th>
+                        <tr>
+                            <th class="w-1/6">Name of restaurants</th>
+                            <th class="w-1/4">Location</th>
+                            <th class="w-1/4">Reason for recommendation</th>
+                            <th class="w-1/3">Other comments</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <!-- Row 1 -->
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-4 align-top font-medium">The Junction</td>
-                            <td class="p-4 align-top">Greyson Street, near the station</td>
-                            <td class="p-4 align-top">
-                                Good for people who are especially keen on <input type="text" data-q="1" class="input-blank w-24 px-1" placeholder="(1)"> food.
-                                <div id="fb-1" class="feedback"></div>
+                    <tbody>
+                        <!-- Row 1: The Junction -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="font-bold">The Junction</td>
+                            <td>Greyson Street, near the station</td>
+                            <td>
+                                <ul class="cell-list">
+                                    <li>
+                                        Good for people who are especially keen on <span class="q-num">1</span><input type="text" data-q="1" class="input-blank w-24" aria-label="Question 1"> food.
+                                        <div id="fb-1" class="feedback"></div>
+                                    </li>
+                                </ul>
                             </td>
-                            <td class="p-4 align-top">Quite expensive.</td>
+                            <td>
+                                <ul class="cell-list">
+                                    <li>Quite expensive.</li>
+                                    <li>
+                                        The <span class="q-num">2</span><input type="text" data-q="2" class="input-blank w-24" aria-label="Question 2"> is a good place for a drink.
+                                        <div id="fb-2" class="feedback"></div>
+                                    </li>
+                                </ul>
+                            </td>
                         </tr>
                         
-                        <!-- Row 2 -->
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-4 align-top font-medium">Paloma</td>
-                            <td class="p-4 align-top">In Bow Street next to the cinema</td>
-                            <td class="p-4 align-top">
-                                <input type="text" data-q="3" class="input-blank w-full mb-1" placeholder="(3)">
-                                <div id="fb-3" class="feedback"></div>
-                                dishes are good for sharing.
+                        <!-- Row 2: Paloma -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="font-bold">Paloma</td>
+                            <td>In Bow Street next to the cinema</td>
+                            <td>
+                                <ul class="cell-list">
+                                    <li>
+                                        <span class="q-num">3</span><input type="text" data-q="3" class="input-blank w-full md:w-32 mb-1" aria-label="Question 3"> dishes are good for sharing.
+                                        <div id="fb-3" class="feedback"></div>
+                                    </li>
+                                </ul>
                             </td>
-                            <td class="p-4 align-top">
-                                The <input type="text" data-q="2" class="input-blank w-24 px-1" placeholder="(2)"> is a good place for a drink.
-                                <div id="fb-2" class="feedback"></div>
-                                <div class="mt-2 text-sm text-gray-600">Staff are very friendly. Need to pay £50 deposit.</div>
+                            <td>
+                                <ul class="cell-list">
+                                    <li>Staff are very friendly.</li>
+                                    <li>Need to pay £50 deposit.</li>
+                                    <li>
+                                        A limited selection of <span class="q-num">4</span><input type="text" data-q="4" class="input-blank w-24" aria-label="Question 4"> on the menu.
+                                        <div id="fb-4" class="feedback"></div>
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
 
-                        <!-- Row 3 -->
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-4 align-top font-medium">
-                                The <input type="text" data-q="5" class="input-blank w-24 px-1" placeholder="(5)">
+                        <!-- Row 3: The (5) -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="font-bold">
+                                The <span class="q-num">5</span><input type="text" data-q="5" class="input-blank w-24" aria-label="Question 5">
                                 <div id="fb-5" class="feedback"></div>
                             </td>
-                            <td class="p-4 align-top">
-                                At the top of a <input type="text" data-q="6" class="input-blank w-24 px-1" placeholder="(6)">
+                            <td>
+                                At the top of a <span class="q-num">6</span><input type="text" data-q="6" class="input-blank w-24" aria-label="Question 6">
                                 <div id="fb-6" class="feedback"></div>
                             </td>
-                            <td class="p-4 align-top">
-                                A famous chef. All the <input type="text" data-q="7" class="input-blank w-24 px-1" placeholder="(7)"> are very good.
-                                <div id="fb-7" class="feedback"></div>
-                                <div class="mt-2">Only uses <input type="text" data-q="8" class="input-blank w-24 px-1" placeholder="(8)"> ingredients.</div>
-                                <div id="fb-8" class="feedback"></div>
+                            <td>
+                                <ul class="cell-list">
+                                    <li>A famous chef.</li>
+                                    <li>
+                                        All the <span class="q-num">7</span><input type="text" data-q="7" class="input-blank w-24" aria-label="Question 7"> are very good.
+                                        <div id="fb-7" class="feedback"></div>
+                                    </li>
+                                    <li>
+                                        Only uses <span class="q-num">8</span><input type="text" data-q="8" class="input-blank w-24" aria-label="Question 8"> ingredients.
+                                        <div id="fb-8" class="feedback"></div>
+                                    </li>
+                                </ul>
                             </td>
-                            <td class="p-4 align-top">
-                                A limited selection of <input type="text" data-q="4" class="input-blank w-24 px-1" placeholder="(4)"> on the menu.
-                                <div id="fb-4" class="feedback"></div>
-                                <div class="mt-2">Set lunch cost: £<input type="text" data-q="9" class="input-blank w-16 px-1" placeholder="(9)"> per person.</div>
-                                <div id="fb-9" class="feedback"></div>
-                                <div class="mt-2">Proportions probably of <input type="text" data-q="10" class="input-blank w-24 px-1" placeholder="(10)"> size.</div>
-                                <div id="fb-10" class="feedback"></div>
+                            <td>
+                                <ul class="cell-list">
+                                    <li>
+                                        Set lunch cost: £<span class="q-num">9</span><input type="text" data-q="9" class="input-blank w-16" aria-label="Question 9"> per person.
+                                        <div id="fb-9" class="feedback"></div>
+                                    </li>
+                                    <li>
+                                        Proportions probably of <span class="q-num">10</span><input type="text" data-q="10" class="input-blank w-24" aria-label="Question 10"> size.
+                                        <div id="fb-10" class="feedback"></div>
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <div class="mt-6 flex justify-end">
+                <button onclick="checkPart1()" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700 transition font-medium">
+                    Check Part 1
+                </button>
+            </div>
         </div>
 
         <!-- Part 2: Pottery -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-            <div class="border-b border-gray-100 pb-4 mb-6">
-                <h2 class="text-xl font-bold text-blue-600">Part 2: Pottery</h2>
-                <p class="text-sm text-gray-500 mt-1">Questions 11-16: Choose the correct letter, <strong>A, B or C</strong>.</p>
+        <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+            <div class="border-b border-gray-200 pb-4 mb-6 flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Part 2: Pottery</h2>
+                    <p class="text-sm text-gray-500 mt-1">Questions 11-20</p>
+                </div>
+                <div class="text-right">
+                    <span id="score-part2" class="font-bold text-xl text-gray-400">0/10</span>
+                </div>
             </div>
 
             <div class="space-y-8">
+                <div class="bg-blue-50 p-4 rounded-md mb-6">
+                     <p class="font-semibold text-blue-800">Questions 11-16: Choose the correct letter, A, B or C.</p>
+                </div>
+
                 <!-- Q11 -->
                 <div class="question-block" data-q="11">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">11.</span> Heather says pottery differs from other art forms because</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">11.</span> Heather says pottery differs from other art forms because</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q11" value="A" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q11" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>A. It lasts longer in the ground.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q11" value="B" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q11" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>B. It is practiced by more people.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q11" value="C" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q11" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>C. It can be repaired more easily.</span>
                         </label>
                     </div>
@@ -153,18 +240,18 @@
 
                 <!-- Q12 -->
                 <div class="question-block" data-q="12">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">12.</span> Archaeologists sometimes identify the use of ancient pottery from</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">12.</span> Archaeologists sometimes identify the use of ancient pottery from</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q12" value="A" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q12" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>A. The clay it was made with.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q12" value="B" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q12" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>B. The marks that are on it.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q12" value="C" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q12" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>C. The basic shape of it.</span>
                         </label>
                     </div>
@@ -173,18 +260,18 @@
 
                 <!-- Q13 -->
                 <div class="question-block" data-q="13">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">13.</span> Some people join Heather's pottery class because they want to</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">13.</span> Some people join Heather's pottery class because they want to</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q13" value="A" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q13" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>A. Create an item that looks very old.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q13" value="B" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q13" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>B. Find something that they are good at.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q13" value="C" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q13" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>C. Make something that will outlive them.</span>
                         </label>
                     </div>
@@ -193,18 +280,18 @@
 
                 <!-- Q14 -->
                 <div class="question-block" data-q="14">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">14.</span> What does Heather value most about being a potter?</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">14.</span> What does Heather value most about being a potter?</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q14" value="A" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q14" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>A. Its calming effect</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q14" value="B" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q14" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>B. Its messy nature</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q14" value="C" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q14" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>C. Its physical benefits</span>
                         </label>
                     </div>
@@ -213,18 +300,18 @@
 
                 <!-- Q15 -->
                 <div class="question-block" data-q="15">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">15.</span> Most of the visitors to Edelman Pottery</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">15.</span> Most of the visitors to Edelman Pottery</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q15" value="A" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q15" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>A. Bring friends to join courses.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q15" value="B" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q15" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>B. Have never made a pot before.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q15" value="C" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q15" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>C. Try to learn techniques too quickly.</span>
                         </label>
                     </div>
@@ -233,50 +320,50 @@
 
                 <!-- Q16 -->
                 <div class="question-block" data-q="16">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">16.</span> Heather reminds her visitors that they should</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">16.</span> Heather reminds her visitors that they should</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q16" value="A" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q16" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>A. Put on their aprons.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q16" value="B" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q16" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>B. Change their clothes.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="radio" name="q16" value="C" class="text-blue-600 focus:ring-blue-500">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="radio" name="q16" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4">
                             <span>C. Take off their jewellery.</span>
                         </label>
                     </div>
                     <div id="fb-16" class="feedback ml-4"></div>
                 </div>
 
-                <div class="border-t border-gray-100 my-6 pt-4">
-                     <p class="text-sm text-gray-500 mt-1 mb-4">Questions 17-20: Choose <strong>TWO</strong> letters, A-E.</p>
+                <div class="bg-blue-50 p-4 rounded-md my-6">
+                     <p class="font-semibold text-blue-800">Questions 17-20: Choose TWO letters, A-E.</p>
                 </div>
 
                 <!-- Q17-18 -->
                 <div class="question-block" data-group="17-18">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">17-18.</span> Which <strong>TWO</strong> things does Heather explain about kilns?</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">17-18.</span> Which <strong>TWO</strong> things does Heather explain about kilns?</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q17_18" value="A" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q17_18" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>A. what their function is</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q17_18" value="B" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q17_18" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>B. when they were invented</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q17_18" value="C" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q17_18" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>C. ways of keeping them safe</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q17_18" value="D" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q17_18" value="D" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>D. where to put one in your home</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q17_18" value="E" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q17_18" value="E" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>E. what some people use instead of one</span>
                         </label>
                     </div>
@@ -285,50 +372,47 @@
 
                 <!-- Q19-20 -->
                 <div class="question-block mt-8" data-group="19-20">
-                    <p class="font-medium text-gray-800 mb-3"><span class="text-blue-500 font-bold mr-2">19-20.</span> Which <strong>TWO</strong> points does Heather make about a potter's tools?</p>
+                    <p class="font-medium text-gray-900 mb-3"><span class="font-bold mr-2">19-20.</span> Which <strong>TWO</strong> points does Heather make about a potter's tools?</p>
                     <div class="space-y-2 pl-4">
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q19_20" value="A" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q19_20" value="A" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>A. Some are hard to hold.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q19_20" value="B" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q19_20" value="B" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>B. Some are worth buying.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q19_20" value="C" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q19_20" value="C" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>C. Some are essential items.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q19_20" value="D" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q19_20" value="D" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>D. Some have memorable names.</span>
                         </label>
-                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50">
-                            <input type="checkbox" name="q19_20" value="E" class="text-blue-600 focus:ring-blue-500 rounded">
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded hover:bg-gray-50 border border-transparent hover:border-gray-200">
+                            <input type="checkbox" name="q19_20" value="E" class="text-blue-600 focus:ring-blue-500 h-4 w-4 rounded">
                             <span>E. Some are available for use by participants.</span>
                         </label>
                     </div>
                     <div id="fb-19-20" class="feedback ml-4"></div>
                 </div>
 
+                <div class="mt-8 flex justify-end">
+                    <button onclick="checkPart2()" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700 transition font-medium">
+                        Check Part 2
+                    </button>
+                </div>
+
             </div>
         </div>
 
-        <!-- Controls -->
-        <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-lg flex justify-between items-center z-50">
-            <div class="text-gray-600 font-medium ml-4">
-                Score: <span id="score-display" class="text-lg font-bold text-gray-900">- / 20</span>
-            </div>
-            <div class="mr-4 space-x-3">
-                <button onclick="resetTest()" class="px-6 py-2.5 rounded-lg font-medium text-gray-600 hover:bg-gray-100 transition-colors">
-                    Reset
-                </button>
-                <button onclick="checkAnswers()" class="px-6 py-2.5 rounded-lg font-medium bg-blue-600 text-white hover:bg-blue-700 shadow-sm transition-colors">
-                    Check Answers
-                </button>
-            </div>
+        <!-- Global Reset -->
+        <div class="text-center pb-8">
+            <button onclick="resetTest()" class="text-gray-500 hover:text-red-500 underline text-sm transition-colors">
+                Reset All Answers
+            </button>
         </div>
-        <div class="h-16"></div> <!-- Spacer for fixed footer -->
 
     </div>
 
@@ -357,23 +441,19 @@
             "19-20": ["C", "E"]
         };
 
-        function checkAnswers() {
+        function checkPart1() {
             let correctCount = 0;
-            let totalQuestions = 20;
+            const totalQuestions = 10;
 
-            // Reset styles
-            document.querySelectorAll('.input-blank').forEach(el => {
-                el.classList.remove('correct', 'incorrect');
-            });
-            document.querySelectorAll('.feedback').forEach(el => {
-                el.classList.remove('show');
-                el.innerHTML = '';
-            });
-
-            // Check Part 1 (Text Inputs)
+            // Reset styles for Part 1
             for (let i = 1; i <= 10; i++) {
                 const input = document.querySelector(`input[data-q="${i}"]`);
                 const feedback = document.getElementById(`fb-${i}`);
+                if (!input) continue;
+
+                input.classList.remove('correct', 'incorrect');
+                feedback.classList.remove('show');
+                
                 const userAnswer = input.value.trim().toLowerCase();
                 const correctAnswer = answers[i];
 
@@ -382,43 +462,56 @@
                     correctCount++;
                 } else {
                     input.classList.add('incorrect');
-                    feedback.innerHTML = `<span class="text-red-600"><i class="fas fa-times-circle"></i> Correct: <strong>${answers[i]}</strong></span>`;
+                    feedback.innerHTML = `<span class="text-red-600 font-medium">Correct: ${answers[i]}</span>`;
                     feedback.classList.add('show');
                 }
             }
 
-            // Check Part 2 (Radio Buttons 11-16)
+            const scoreEl = document.getElementById('score-part1');
+            scoreEl.textContent = `${correctCount}/${totalQuestions}`;
+            scoreEl.className = "font-bold text-xl " + (correctCount === totalQuestions ? "text-green-600" : "text-blue-600");
+        }
+
+        function checkPart2() {
+            let correctCount = 0;
+            const totalQuestions = 10; // 6 single + 4 from multi-select
+
+            // Clear feedback
+            document.querySelectorAll('#score-part2 ~ .space-y-8 .feedback').forEach(el => {
+                el.classList.remove('show');
+                el.innerHTML = '';
+            });
+
+            // Check Single Choice (11-16)
             for (let i = 11; i <= 16; i++) {
                 const selected = document.querySelector(`input[name="q${i}"]:checked`);
                 const feedback = document.getElementById(`fb-${i}`);
                 
                 if (selected) {
                     if (selected.value === answers[i]) {
-                        feedback.innerHTML = `<span class="text-green-600"><i class="fas fa-check-circle"></i> Correct!</span>`;
+                        feedback.innerHTML = `<span class="text-green-600 font-medium"><i class="fas fa-check"></i> Correct</span>`;
                         feedback.classList.add('show');
                         correctCount++;
                     } else {
-                        feedback.innerHTML = `<span class="text-red-600"><i class="fas fa-times-circle"></i> Incorrect. The answer is <strong>${answers[i]}</strong>.</span>`;
+                        feedback.innerHTML = `<span class="text-red-600 font-medium"><i class="fas fa-times"></i> Incorrect. Answer: ${answers[i]}</span>`;
                         feedback.classList.add('show');
                     }
                 } else {
-                    feedback.innerHTML = `<span class="text-red-600">Please select an answer.</span>`;
+                    feedback.innerHTML = `<span class="text-orange-600 font-medium">Not answered</span>`;
                     feedback.classList.add('show');
                 }
             }
 
-            // Check Part 2 (Checkboxes 17-20)
+            // Check Multi Choice (17-20)
             const checkMulti = (groupName, correctArr) => {
                 const selected = Array.from(document.querySelectorAll(`input[name="q${groupName.replace('-','_')}"]:checked`)).map(cb => cb.value);
                 const feedback = document.getElementById(`fb-${groupName}`);
                 
-                // Sort for comparison
                 const userSet = new Set(selected);
                 const correctSet = new Set(correctArr);
                 
                 let groupCorrect = 0;
                 
-                // Calculate score for this group (1 point per correct option selected)
                 selected.forEach(val => {
                     if (correctSet.has(val)) {
                         groupCorrect++;
@@ -426,15 +519,12 @@
                     }
                 });
 
-                // Display logic
                 if (selected.length !== 2) {
-                    feedback.innerHTML = `<span class="text-orange-600"><i class="fas fa-exclamation-circle"></i> Please select exactly 2 options.</span>`;
+                     feedback.innerHTML = `<span class="text-orange-600 font-medium">Please select exactly 2 options.</span>`;
                 } else if (groupCorrect === 2) {
-                    feedback.innerHTML = `<span class="text-green-600"><i class="fas fa-check-circle"></i> Both correct!</span>`;
-                } else if (groupCorrect === 1) {
-                    feedback.innerHTML = `<span class="text-orange-600"><i class="fas fa-exclamation-circle"></i> 1/2 correct. Answers: <strong>${correctArr.join(" & ")}</strong></span>`;
+                    feedback.innerHTML = `<span class="text-green-600 font-medium"><i class="fas fa-check"></i> Both correct</span>`;
                 } else {
-                    feedback.innerHTML = `<span class="text-red-600"><i class="fas fa-times-circle"></i> Incorrect. Answers: <strong>${correctArr.join(" & ")}</strong></span>`;
+                    feedback.innerHTML = `<span class="text-red-600 font-medium">Incorrect. Answers: ${correctArr.join(" & ")}</span>`;
                 }
                 feedback.classList.add('show');
             };
@@ -442,12 +532,9 @@
             checkMulti("17-18", answers["17-18"]);
             checkMulti("19-20", answers["19-20"]);
 
-            // Update Score
-            const scoreEl = document.getElementById('score-display');
-            scoreEl.textContent = `${correctCount} / ${totalQuestions}`;
-            
-            // Scroll to top feedback
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const scoreEl = document.getElementById('score-part2');
+            scoreEl.textContent = `${correctCount}/${totalQuestions}`;
+            scoreEl.className = "font-bold text-xl " + (correctCount === totalQuestions ? "text-green-600" : "text-blue-600");
         }
 
         function resetTest() {
@@ -461,7 +548,10 @@
                     el.classList.remove('show');
                     el.innerHTML = '';
                 });
-                document.getElementById('score-display').textContent = "- / 20";
+                document.getElementById('score-part1').textContent = "0/10";
+                document.getElementById('score-part1').className = "font-bold text-xl text-gray-400";
+                document.getElementById('score-part2').textContent = "0/10";
+                document.getElementById('score-part2').className = "font-bold text-xl text-gray-400";
             }
         }
     </script>
